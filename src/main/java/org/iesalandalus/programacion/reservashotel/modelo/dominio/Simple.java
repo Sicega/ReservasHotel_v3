@@ -8,8 +8,9 @@ public class Simple extends Habitacion{
         super(planta, puerta, precio); // Llamo a la superclase con super
     }
 
-    public Simple(Habitacion habitacion) {
-        super(habitacion); // Utilizo super también para el constructor copia
+    public Simple(Simple habitacionSimple) {
+        super(habitacionSimple); // Utilizo super también para el constructor copia
+
     }
 
     public int getNumeroMaximoPersonas(){ // Implemento el método que debe tener la clase al heredar de Habitacion
@@ -18,8 +19,7 @@ public class Simple extends Habitacion{
 
     @Override
     public String toString() { // Genero el toString con la cadena esperada por el test
-        return String.format("identificador=%s (%d-%d), precio habitación=%s, habitación simple, capacidad=%d personas",
-                this.getIdentificador(), this.getPlanta(), this.getPuerta(), this.getPrecio(),
-                this.getNumeroMaximoPersonas());
+        return String.format("%s, habitación simple, capacidad=%d personas",
+                super.toString(), getNumeroMaximoPersonas());
     }
 }
