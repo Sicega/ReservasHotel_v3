@@ -1,51 +1,34 @@
 package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 
 import java.util.Objects;
-public class Habitacion {
+public abstract class Habitacion { //Declaro la clase como abstracta
 
     public static final double MIN_PRECIO_HABITACION=40;
     public static final double MAX_PRECIO_HABITACION=150;
-    public static final int MIN_NUMERO_PUERTA=0; //Pongo 0 en mínimo de puerta porque así lo establece el test
-    public static final int MAX_NUMERO_PUERTA=14; //Pongo 14 de máximo en puerta ya que inicializa en 0 y son 15 puertas
+    public static final int MIN_NUMERO_PUERTA=0;
+    public static final int MAX_NUMERO_PUERTA=14;
     public static final int MIN_NUMERO_PLANTA=1;
     public static final int MAX_NUMERO_PLANTA=3;
 
-    private String identificador;
-    private int planta;
-    private int puerta;
-    private double precio;
-    private TipoHabitacion tipoHabitacion;
+    // Cambio los atributos private por protected
 
+    protected String identificador;
+    protected int planta;
+    protected int puerta;
+    protected double precio;
 
-    /*2-Creo los métodos de acceso y modificación con la visibilidad adecuada,
-     * en el método setIdentificador concateno la planta y la puerta para que lo almacene
-     * en la variable identificador*/
+    // Elimino el atributo private tipoHabitacion tipoHabitacion
 
-    // MÉTODOS CONSTRUCTORES
-
-    /*3-Creo los métodos constructores con sus parámetros, haciendo uso de los métodos de modificación.*/
 
     public Habitacion (int planta, int puerta, double precio){
 
         setPlanta(planta);
         setPuerta(puerta);
         setPrecio(precio);
-        setIdentificador(); // Llamo al método para actualizar el identificador
-        setTipoHabitacion(TipoHabitacion.SIMPLE); //Inicializo el tipo de habitación en cualquier tipo válido
+        setIdentificador();
     }
 
-    public Habitacion (int planta, int puerta, double precio, TipoHabitacion tipoHabitacion){
-
-
-        setPlanta(planta);
-        setPuerta(puerta);
-        setPrecio(precio);
-        setTipoHabitacion(tipoHabitacion);
-        setIdentificador(); // Llamo al método para actualizar el identificador
-
-    }
-
-    /*4-Creo el constructor copia.*/
+    // Elimino el constructor que ya no es necesario
 
     public Habitacion(Habitacion habitacion){
 
@@ -57,18 +40,19 @@ public class Habitacion {
         this.planta = habitacion.planta;
         this.puerta = habitacion.puerta;
         this.precio = habitacion.precio;
-        this.tipoHabitacion = habitacion.tipoHabitacion;
-        setIdentificador(); // Actualizo el identificador
+        setIdentificador();
     }
 
     // MÉTODOS GETTER Y SETTER
+
+    public abstract int getNumeroMaximoPersonas(); // Declaro el método abstracto
 
     public String getIdentificador() {
 
         return identificador;
     }
 
-    private void setIdentificador(){
+    protected void setIdentificador(){
 
 
         if (planta <= 0 || puerta < 0) {
@@ -78,7 +62,7 @@ public class Habitacion {
         this.identificador = String.format("%d%d", this.planta, this.puerta);//Pongo el formato de identificador que requiere el test
     }
 
-    private void setIdentificador(String identificador){
+    protected void setIdentificador(String identificador){
 
 
         if (identificador == null || identificador.isBlank()) {
@@ -96,7 +80,7 @@ public class Habitacion {
         return planta;
     }
 
-    private void setPlanta(int planta){
+    protected void setPlanta(int planta){
 
 
 
@@ -125,7 +109,7 @@ public class Habitacion {
 
     }
 
-    private void setPuerta(int puerta){
+    protected void setPuerta(int puerta){
 
 
 
@@ -145,7 +129,7 @@ public class Habitacion {
         return precio;
     }
 
-    public void setPrecio(double precio){
+    protected void setPrecio(double precio){
 
         if (precio < MIN_PRECIO_HABITACION || precio > MAX_PRECIO_HABITACION) {
 
@@ -159,55 +143,27 @@ public class Habitacion {
 
     }
 
-    public TipoHabitacion getTipoHabitacion() {
-
-        return tipoHabitacion;
-    }
-
-    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
-
-        if (tipoHabitacion == null) {
-
-            throw new NullPointerException("ERROR: No se puede establecer un tipo de habitación nula.");
-
-        }
-
-        if (tipoHabitacion != TipoHabitacion.SIMPLE && tipoHabitacion != TipoHabitacion.DOBLE &&
-                tipoHabitacion != TipoHabitacion.SUITE && tipoHabitacion != TipoHabitacion.TRIPLE) {
-
-            throw new IllegalArgumentException("ERROR: Tipo de habitación no válido.");
-        }
-
-        this.tipoHabitacion = tipoHabitacion;
-    }
-
-
-    /*5-Creo los métodos equals y hashCode teniendo en cuenta que una habitación será igual a otra si su identificador es el mismo.
-     * Para hacer esta comparación importo java.util.Objects*/
-
     @Override
     public boolean equals(Object o) {
 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Habitacion that = (Habitacion) o;
-        return planta == that.planta && puerta == that.puerta && Double.compare(precio, that.precio) == 0 && Objects.equals(identificador, that.identificador) && tipoHabitacion == that.tipoHabitacion;
+        return planta == that.planta && puerta == that.puerta && Double.compare(precio, that.precio) == 0 && Objects.equals(identificador, that.identificador);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(identificador, planta, puerta, precio, tipoHabitacion);
+        return Objects.hash(identificador, planta, puerta, precio);
     }
-
-    /*6-Creo el método toString que devuelve la cadena que esperan los tests.*/
 
     @Override
     public String toString() {
 
-        return String.format("identificador=%s (%d-%d), precio habitación=%s, tipo habitación=%s",
+        return String.format("identificador=%s (%d-%d), precio habitación=%s",
 
-                identificador, planta, puerta, precio, tipoHabitacion);
+                identificador, planta, puerta, precio);
     }
 
 }
