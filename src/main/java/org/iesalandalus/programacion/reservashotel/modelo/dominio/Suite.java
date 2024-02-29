@@ -24,7 +24,7 @@ public class Suite extends Habitacion{
         return numBanos;
     }
 
-    public void setNumBanos(int numBanos) {
+    public void setNumBanos(int numBanos) { // Valido el nº de baños
         if(numBanos<MIN_NUM_BANOS || numBanos >MAX_NUM_BANOS){
             throw new IllegalArgumentException("El número de baños no es correcto para la habitación Suite");
         }
@@ -40,12 +40,12 @@ public class Suite extends Habitacion{
     }
 
     @Override
-    public int getNumeroMaximoPersonas() {
+    public int getNumeroMaximoPersonas() { // Implemento el método heredado que devuelve el nº máximo de personas
         return NUM_MAXIMO_PERSONAS;
     }
 
     @Override
-    public String toString() {
+    public String toString() { // Devuelvo la cadena esperada por los tests
         return String.format("%s, habitación suite, capacidad=%d personas, baños=%d, %s",
                 super.toString(), getNumeroMaximoPersonas(), numBanos, tieneJacuzzi ? "con Jacuzzi" : "sin Jacuzzi");
     }

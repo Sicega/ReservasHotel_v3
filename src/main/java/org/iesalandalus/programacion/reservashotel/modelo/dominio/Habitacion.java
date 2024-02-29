@@ -145,17 +145,15 @@ public abstract class Habitacion { //Declaro la clase como abstracta
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Habitacion that = (Habitacion) o;
-        return planta == that.planta && puerta == that.puerta && Double.compare(precio, that.precio) == 0 && Objects.equals(identificador, that.identificador);
+        return Objects.equals(identificador, that.identificador);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(identificador, planta, puerta, precio);
+        return Objects.hash(identificador);
     }
 
     @Override
