@@ -2,7 +2,7 @@ package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 
 public class Simple extends Habitacion{
 
-    private int NUM_MAXIMO_PERSONAS=1; // Declaro la constante privada que almacena el nº max. de personas, en este caso 1 al ser simple
+    private static final int NUM_MAXIMO_PERSONAS=1; // Declaro la constante privada que almacena el nº max. de personas, en este caso 1 al ser simple
 
     public Simple(int planta, int puerta, double precio) {
         super(planta, puerta, precio); // Llamo a la superclase con super
@@ -10,7 +10,6 @@ public class Simple extends Habitacion{
 
     public Simple(Simple habitacionSimple) {
         super(habitacionSimple); // Utilizo super también para el constructor copia
-
     }
 
     public int getNumeroMaximoPersonas(){ // Implemento el método que debe tener la clase al heredar de Habitacion

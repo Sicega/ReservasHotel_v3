@@ -2,11 +2,11 @@ package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 
 public class Doble extends Habitacion{
 
-    private int NUM_MAXIMO_PERSONAS=2; // Al ser habitacion doble el nº máx. personas es 2
-    int MIN_NUM_CAMAS_INDIVIDUALES=2; // Modificador por defecto package
-    int MAX_NUM_CAMAS_INDIVIDUALES=2;
-    int MIN_NUM_CAMAS_DOBLES=1;
-    int MAX_NUM_CAMAS_DOBLES=1;
+    private static final int NUM_MAXIMO_PERSONAS=2; // Al ser habitacion doble el nº máx. personas es 2
+    static final int MIN_NUM_CAMAS_INDIVIDUALES=2; // Modificador por defecto package
+    static final int MAX_NUM_CAMAS_INDIVIDUALES=2;
+    static final int MIN_NUM_CAMAS_DOBLES=1;
+    static final int MAX_NUM_CAMAS_DOBLES=1;
     private int numCamasIndividuales;
     private int numCamasDobles;
 
@@ -18,6 +18,8 @@ public class Doble extends Habitacion{
 
     public Doble(Doble habitacionDoble) {
         super(habitacionDoble);
+        setNumCamasIndividuales(habitacionDoble.getNumCamasIndividuales());
+        setNumCamasDobles(habitacionDoble.getNumCamasDobles());
     }
 
     public int getNumCamasIndividuales() {
