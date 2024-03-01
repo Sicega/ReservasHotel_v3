@@ -140,13 +140,13 @@ public class Modelo {
 
     public void realizarCheckIn(Reserva reserva, LocalDateTime fecha) {
 
-        reservas.realizarCheckin(reserva, fecha);
+        reservas.realizarCheckIn(reserva, fecha);
 
     }
 
     public void realizarCheckOut(Reserva reserva, LocalDateTime fecha) {
 
-        reservas.realizarCheckout(reserva, fecha);
+        reservas.realizarCheckOut(reserva, fecha);
 
     }
 

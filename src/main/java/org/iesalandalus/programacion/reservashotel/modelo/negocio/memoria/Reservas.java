@@ -4,6 +4,7 @@ import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.negocio.IReservas;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Reservas {
+public class Reservas implements IReservas {
 
     // ArrayList para almacenar las reservas
     private final List<Reserva> coleccionReservas;
@@ -175,7 +176,10 @@ public class Reservas {
     }
 
     // Para realizar el checkin de una reserva
-    public void realizarCheckin(Reserva reserva, LocalDateTime fecha) {
+
+
+    @Override
+    public void realizarCheckIn(Reserva reserva, LocalDateTime fecha) {
         if (reserva == null || fecha == null) {
             throw new NullPointerException("ERROR: La reserva y la fecha no pueden ser nulas.");
         }
@@ -201,7 +205,8 @@ public class Reservas {
     }
 
     // Para realizar el checkout de una reserva
-    public void realizarCheckout(Reserva reserva, LocalDateTime fecha) {
+    @Override
+    public void realizarCheckOut(Reserva reserva, LocalDateTime fecha) {
         if (reserva == null || fecha == null) {
             throw new NullPointerException("ERROR: La reserva y la fecha no pueden ser nulas.");
         }

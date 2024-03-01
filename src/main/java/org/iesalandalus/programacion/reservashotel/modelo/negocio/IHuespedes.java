@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IHuespedes {
 
-    List<? extends Huesped> get();
+    List<Huesped> get();
     int getTamano();
     void insertar(Huesped huesped);
     Huesped buscar(Huesped huesped);

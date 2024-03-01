@@ -255,7 +255,7 @@ public class Consola {
     public static LocalDateTime leerFechaHora(String mensaje) {
 
 
-        while (!mensaje.matches(Reserva.FORMATO_FECHA_HORA_RESERVA)) {
+        while (!mensaje.matches("[0-3][0-9]/[01][0-9]/[0-9]{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]")){
             System.out.print(mensaje + "No es un patrón válido. Inténtalo de nuevo. (dd/MM/yyyy hh:mm:ss");
             mensaje = Entrada.cadena();
         }

@@ -18,6 +18,7 @@ public class MainApp {
         // Inicio la aplicación invocando el método comenzar del controlador
 
         controlador.comenzar();
+        controlador.terminar();
     }
 
 }

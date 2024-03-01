@@ -49,7 +49,7 @@ public class Habitaciones implements IHabitaciones {
         Iterator<Habitacion> iterator = coleccionHabitaciones.iterator();
         while (iterator.hasNext()) {
             Habitacion habitacion = iterator.next();
-            if (habitacion.getTipoHabitacion().equals(tipoHabitacion)) {
+            if (habitacion.getClass().equals(tipoHabitacion)) {
                 habitacionesTipo.add(new Habitacion(habitacion));
             }
         }
@@ -91,6 +91,7 @@ public class Habitaciones implements IHabitaciones {
 
         // Busco el índice de la habitación en la colección
         int indice = buscarIndice(habitacion);
+        habitacion.getClass();
 
         // Devuelvo la habitación encontrada o null si no se encontró
         return (indice != -1) ? new Habitacion(coleccionHabitaciones.get(indice)) : null;

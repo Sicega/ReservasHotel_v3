@@ -346,10 +346,17 @@ public class Vista {
 
 
     private static List<Reserva> getReservasAnulables(List<Reserva> reservasAnular) {
-        return reservasAnular.stream() // Utilizo stream para filtrar las reservas anulables
-                // Filtro las reservas cuya fecha de inicio sea posterior a la fecha y hora actuales
-                .filter(reserva -> reserva.getFechaInicioReserva().isAfter(ChronoLocalDate.from(LocalDateTime.now())))
-                .collect(Collectors.toList()); // Con collect recojo el resultado del filtrado en una lista
+
+        List<Reserva> misReservasAnulables= new ArrayList<>();
+
+        for(Reserva misReservas : reservasAnular){
+            if(misReservas.getFechaInicioReserva().isAfter(LocalDate.now())){
+
+                misReservasAnulables.add(new Reserva(misReservas));
+            }
+        }
+
+        return misReservasAnulables;
     }
 
     private static void anularReserva() {
@@ -358,7 +365,7 @@ public class Vista {
 
         //Convierto reservasAnulables en una Arraylist
 
-        List<Reserva> reservasAnulables = new ArrayList<>(controlador.getReservas(huesped));
+        List<Reserva> reservasAnulables = controlador.getReservas(huesped);
 
         reservasAnulables = getReservasAnulables(reservasAnulables);
 
@@ -366,9 +373,9 @@ public class Vista {
 
             System.out.println("No hay reservas para anular.");
 
-        } else if (reservasAnulables.size() == 1) {
+        } else if (getNumElementosNoNulos(reservasAnulables) == 1) {
 
-            System.out.println("¿Confirma la anulación de la reserva?" + reservasAnulables.get(0));
+            System.out.println("¿Confirma la anulación de la reserva? Escribe si o no" + reservasAnulables.get(0));
 
             if (Entrada.cadena().equalsIgnoreCase("si")) {
 
@@ -566,42 +573,53 @@ public class Vista {
         if (reservasHuesped.isEmpty()) {
 
             System.out.println("El huésped no tiene reservas.");
+        } else if(getNumElementosNoNulos(reservasHuesped)==1){
+            System.out.println("¿Quiere confirmar el checkIn de esta reserva? Escriba \"si\" o \"no\"");
+            System.out.println(reservasHuesped.get(0));
+            String confirmacion=Entrada.cadena();
+            if(confirmacion.equalsIgnoreCase("si")){
+                controlador.realizarCheckIn(reservasHuesped.get(0), fechaCheckin);
+                System.out.println("CheckIn confirmado.");
+            }
 
-            return;
+        }else{
+            System.out.println("Reservas del huésped:");
+
+            Iterator<Reserva> iterator = reservasHuesped.iterator();
+
+            int i = 0;
+
+            while (iterator.hasNext()) { //Recorro la lista de reservas con un iterador
+
+                System.out.println(i + ": " + iterator.next());
+
+                i++;
+            }
+
+            int indiceReserva;
+
+            do {
+                System.out.println("¿Qué reserva desea hacer checkin?");
+
+                indiceReserva = Entrada.entero();
+
+            } while (indiceReserva < 0 || indiceReserva >= reservasHuesped.size());
+
+            try {
+                controlador.realizarCheckIn(reservasHuesped.get(indiceReserva), fechaCheckin);
+
+                System.out.println("Checkin realizado correctamente.");
+
+            } catch (IllegalArgumentException | NullPointerException e) {
+
+                System.out.println(e.getMessage());
+            }
         }
 
-        System.out.println("Reservas del huésped:");
 
-        Iterator<Reserva> iterator = reservasHuesped.iterator();
-
-        int i = 0;
-
-        while (iterator.hasNext()) { //Recorro la lista de reservas con un iterador
-
-            System.out.println(i + ": " + iterator.next());
-
-            i++;
-        }
-
-        int indiceReserva;
-
-        do {
-            System.out.println("¿Qué reserva desea hacer checkin?");
-
-            indiceReserva = Entrada.entero();
-
-        } while (indiceReserva < 0 || indiceReserva >= reservasHuesped.size());
-
-        try {
-            controlador.realizarCheckIn(reservasHuesped.get(indiceReserva), fechaCheckin);
-
-            System.out.println("Checkin realizado correctamente.");
-
-        } catch (IllegalArgumentException | NullPointerException e) {
-
-            System.out.println(e.getMessage());
-        }
     }
+
+    //todo checkout y anular reservas mismos cambios que check in
 
 
     private static void realizarCheckout() {

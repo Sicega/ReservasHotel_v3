@@ -44,8 +44,9 @@ public class Triple extends Habitacion{
     }
 
     public void setNumCamasIndividuales(int numCamasIndividuales) {
-        validaNumCamas();
+
         this.numCamasIndividuales = numCamasIndividuales;
+        validaNumCamas();
     }
 
     public int getNumCamasDobles() {
@@ -53,8 +54,9 @@ public class Triple extends Habitacion{
     }
 
     public void setNumCamasDobles(int numCamasDobles) {
-        validaNumCamas();
+
         this.numCamasDobles = numCamasDobles;
+        validaNumCamas();
     }
 
     private void validaNumCamas(){ // Valido el número de camas para la habitación triple
