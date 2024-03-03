@@ -7,7 +7,6 @@ import javax.naming.OperationNotSupportedException;
 import java.util.List;
 
 public interface IHabitaciones {
-
     List<Habitacion> get();
     List<Habitacion> get(TipoHabitacion tipoHabitacion);
     int getTamano();

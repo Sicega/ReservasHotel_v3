@@ -144,7 +144,17 @@ public class Consola {
 
         TipoHabitacion tipoHabitacion = leerTipoHabitacion();
 
-        return new Habitacion(planta, puerta, precio, tipoHabitacion);
+        if (tipoHabitacion.equals(TipoHabitacion.SIMPLE)) {
+            return new Simple(planta, puerta, precio);
+        }else if(tipoHabitacion.equals(TipoHabitacion.DOBLE)){
+            return new Doble(planta, puerta, precio, 2, 0);
+        } else if (tipoHabitacion.equals(TipoHabitacion.TRIPLE)) {
+            return new Triple(planta, puerta, precio, 2, 2,1);
+        } else if (tipoHabitacion.equals(TipoHabitacion.SUITE)){
+            return new Suite(planta,puerta,precio,2,true);
+        }else{
+            return null;
+        }
     }
 
     public static Habitacion leerHabitacionPorIdentificador() {
@@ -157,19 +167,25 @@ public class Consola {
 
         int puerta = Entrada.entero();
 
-
-
        try {
 
-            return new Habitacion(planta,puerta,50);
+           TipoHabitacion tipoHabitacion = leerTipoHabitacion();
+
+           if (tipoHabitacion.equals(TipoHabitacion.SIMPLE)) {
+               return new Simple(planta, puerta, 50);
+           }else if(tipoHabitacion.equals(TipoHabitacion.DOBLE)){
+               return new Doble(planta, puerta, 50, 2, 0);
+           } else if (tipoHabitacion.equals(TipoHabitacion.TRIPLE)) {
+               return new Triple(planta, puerta, 50, 2, 2,1);
+           } else if (tipoHabitacion.equals(TipoHabitacion.SUITE)){
+               return new Suite(planta,puerta,50,2,true);
+           }
 
         } catch (IllegalArgumentException e) {
 
             System.out.println(e.getMessage());
 
-           return null;
-        }
-
+        } return null;
     }
 
     public static TipoHabitacion leerTipoHabitacion() {
