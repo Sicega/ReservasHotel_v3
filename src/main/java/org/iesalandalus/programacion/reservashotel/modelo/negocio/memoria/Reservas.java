@@ -146,7 +146,7 @@ public class Reservas implements IReservas {
         Iterator<Reserva> iterator = coleccionReservas.iterator();
         while (iterator.hasNext()) {
             Reserva actual = iterator.next();
-            if (actual.getHabitacion().getTipoHabitacion().equals(tipoHabitacion)) {
+            if (actual.getHabitacion().getClass().equals(tipoHabitacion)) { // todo corregir
                 miReserva.add(new Reserva(actual));
             }
         }

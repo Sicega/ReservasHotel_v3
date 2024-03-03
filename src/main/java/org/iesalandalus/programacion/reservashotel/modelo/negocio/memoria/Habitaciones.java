@@ -1,7 +1,6 @@
 package org.iesalandalus.programacion.reservashotel.modelo.negocio.memoria;
 
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.IHabitaciones;
 
 import javax.naming.OperationNotSupportedException;
@@ -32,8 +31,16 @@ public class Habitaciones implements IHabitaciones {
         Iterator<Habitacion> iterator = coleccionHabitaciones.iterator();
         while (iterator.hasNext()) {
             Habitacion habitacion = iterator.next();
-            if (habitacion != null) {
-                miHabitacion.add(new Habitacion(habitacion));
+            if (habitacion != null) { // Debido a la herencia hago uso de instanceof para cada tipo de habitacion
+                if (habitacion instanceof Simple) {
+                    miHabitacion.add(new Simple((Simple) habitacion));
+                } else if (habitacion instanceof Doble) {
+                    miHabitacion.add(new Doble((Doble) habitacion));
+                } else if (habitacion instanceof Triple) {
+                    miHabitacion.add(new Triple((Triple) habitacion));
+                } else if (habitacion instanceof Suite) {
+                    miHabitacion.add(new Suite((Suite) habitacion));
+                }
             }
         }
 
@@ -49,8 +56,16 @@ public class Habitaciones implements IHabitaciones {
         Iterator<Habitacion> iterator = coleccionHabitaciones.iterator();
         while (iterator.hasNext()) {
             Habitacion habitacion = iterator.next();
-            if (habitacion.getClass().equals(tipoHabitacion)) {
-                habitacionesTipo.add(new Habitacion(habitacion));
+            if (habitacion.getClass().equals(tipoHabitacion)) { // todo corregir
+                if (habitacion instanceof Simple) {
+                    habitacionesTipo.add(new Simple((Simple) habitacion));
+                } else if (habitacion instanceof Doble) {
+                    habitacionesTipo.add(new Doble((Doble) habitacion));
+                } else if (habitacion instanceof Triple) {
+                    habitacionesTipo.add(new Triple((Triple) habitacion));
+                } else if (habitacion instanceof Suite) {
+                    habitacionesTipo.add(new Suite((Suite) habitacion));
+                }
             }
         }
 
@@ -69,13 +84,20 @@ public class Habitaciones implements IHabitaciones {
             throw new NullPointerException("ERROR: No se puede insertar una habitación nula.");
         }
 
-        // Compruebo si la habitación ya existe en la colección
         if (buscar(habitacion) != null) {
             throw new OperationNotSupportedException("ERROR: Ya existe una habitación con ese identificador.");
         }
 
-        // Añado la nueva habitación a la colección
-        coleccionHabitaciones.add(new Habitacion(habitacion));
+        // Utilizo instanceof según el tipo de habitacion para añadir a la colección
+        if (habitacion instanceof Simple) {
+            coleccionHabitaciones.add(new Simple((Simple) habitacion));
+        } else if (habitacion instanceof Doble) {
+            coleccionHabitaciones.add(new Doble((Doble) habitacion));
+        } else if (habitacion instanceof Triple) {
+            coleccionHabitaciones.add(new Triple((Triple) habitacion));
+        } else if (habitacion instanceof Suite) {
+            coleccionHabitaciones.add(new Suite((Suite) habitacion));
+        }
     }
 
     // Método privado para buscar el índice de una habitación en la colección
@@ -91,10 +113,20 @@ public class Habitaciones implements IHabitaciones {
 
         // Busco el índice de la habitación en la colección
         int indice = buscarIndice(habitacion);
-        habitacion.getClass();
+        habitacion.getClass(); // todo corregir
 
         // Devuelvo la habitación encontrada o null si no se encontró
-        return (indice != -1) ? new Habitacion(coleccionHabitaciones.get(indice)) : null;
+        if (indice != -1) {
+            if (coleccionHabitaciones.get(indice) instanceof Simple) {
+                return new Simple((Simple) coleccionHabitaciones.get(indice));
+            } else if (coleccionHabitaciones.get(indice) instanceof Doble) {
+                return new Doble((Doble) coleccionHabitaciones.get(indice));
+            } else if (coleccionHabitaciones.get(indice) instanceof Triple) {
+                return new Triple((Triple) coleccionHabitaciones.get(indice));
+            } else if (coleccionHabitaciones.get(indice) instanceof Suite) {
+                return new Suite((Suite) coleccionHabitaciones.get(indice));
+            }
+        } return null;
     }
 
     // Método para borrar una habitación de la colección
