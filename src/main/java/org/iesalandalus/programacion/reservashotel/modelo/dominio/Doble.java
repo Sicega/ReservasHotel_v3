@@ -32,7 +32,6 @@ public class Doble extends Habitacion{
     public void setNumCamasIndividuales(int numCamasIndividuales) {
 
         this.numCamasIndividuales = numCamasIndividuales;
-         // Valida el número de camas individuales tras asignarlo, hago igual para el de camas dobles
 
     }
 
@@ -44,7 +43,6 @@ public class Doble extends Habitacion{
     public void setNumCamasDobles(int numCamasDobles) {
 
         this.numCamasDobles = numCamasDobles;
-
     }
 
     private void validaNumCamas(){ // Hago uso de las constantes para establecer el número obligatorio de camas individuales y dobles
