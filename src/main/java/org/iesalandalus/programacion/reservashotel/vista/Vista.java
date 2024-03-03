@@ -253,7 +253,7 @@ public class Vista {
 
     public void listarReservas(Huesped huesped) { // Lista las reservas de un hu�sped
 
-        // Obtengo la lista de reservas para el hu�sped desde la clase controlador
+        // Obtengo la lista de reservas para el hu�sped desde controlador
         List<Reserva> reservasHuesped = controlador.getReservas(huesped);
 
         if (!reservasHuesped.isEmpty()) {

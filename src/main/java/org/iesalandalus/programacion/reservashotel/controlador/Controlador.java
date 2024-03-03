@@ -45,7 +45,7 @@ public class Controlador {
 
     }
 
-    //M?todos para gestionar huespedes
+    //Metodos para gestionar huespedes
 
     public void insertar(Huesped huesped) throws OperationNotSupportedException {
 
@@ -70,7 +70,7 @@ public class Controlador {
         return modelo.getHuespedes();
     }
 
-    //M?todos para gestionar habitaciones
+    //Metodos para gestionar habitaciones
 
     public void insertar(Habitacion habitacion) throws OperationNotSupportedException {
 
@@ -135,7 +135,7 @@ public class Controlador {
     }
 
 
-    //M?todos para gestionar checkIn y checkOut
+    //Metodos para gestionar checkIn y checkOut
 
     public void realizarCheckIn(Reserva reserva, LocalDateTime fecha)  {
 
