@@ -11,7 +11,7 @@ public class Reserva {
     public static final int MAX_NUMERO_MESES_RESERVA=6;
     private static final int MAX_HORAS_POSTERIOR_CHECKOUT=12;
     public static final String FORMATO_FECHA_RESERVA="dd/MM/yyyy";
-    public static final String FORMATO_FECHA_HORA_RESERVA="dd/MM/yyyy hh:mm:ss";
+    public static final String FORMATO_FECHA_HORA_RESERVA="dd/MM/yyyy HH:mm:ss";
 
     private Huesped huesped;
     private Habitacion habitacion;
@@ -285,8 +285,6 @@ public class Reserva {
         return Objects.hash(habitacion, fechaInicioReserva);
     }
 
-    //todo getTipoHabitacion por getNumeroMaximoPersonas en toString?
-
     @Override
     public String toString() {
 
@@ -298,10 +296,10 @@ public class Reserva {
 
         String checkOutString = getCheckOut() != null ? getCheckOut().format(formatoFechaHora) : "No registrado";
 
-        return String.format("Huesped: %s %s Habitación:%s - %s Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s Precio: %.2f Personas: %d",
-                getHuesped().getNombre(), getHuesped().getDni(), getHabitacion().getIdentificador(),
-                getHabitacion().getNumeroMaximoPersonas(), getFechaInicioReserva().format(formatoFecha),
-                getFechaFinReserva().format(formatoFecha), checkInString, checkOutString, getPrecio(), getNumeroPersonas());
+        return String.format("Huesped: %s %s Habitación:%s Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s Precio: %.2f Personas: %d", getHuesped().getNombre(), getHuesped().getDni(),
+                getHabitacion(), getFechaInicioReserva().format(formatoFecha),
+                getFechaFinReserva().format(formatoFecha), checkInString,
+                checkOutString, getPrecio(), getNumeroPersonas());
     }
 
 }

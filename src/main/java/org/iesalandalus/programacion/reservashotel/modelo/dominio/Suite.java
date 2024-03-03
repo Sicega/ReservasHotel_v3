@@ -26,7 +26,7 @@ public class Suite extends Habitacion{
 
     public void setNumBanos(int numBanos) { // Valido el nº de baños
         if(numBanos<MIN_NUM_BANOS || numBanos >MAX_NUM_BANOS){
-            throw new IllegalArgumentException("El número de baños no es correcto para la habitación Suite");
+            throw new IllegalArgumentException("ERROR: El número de baños no puede ser inferior a 2 ni superior a 2");
         }
         this.numBanos = numBanos;
     }

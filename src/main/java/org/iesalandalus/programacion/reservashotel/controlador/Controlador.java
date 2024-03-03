@@ -98,7 +98,7 @@ public class Controlador {
     }
 
 
-    //M?todos para gestionar reservas
+    //Metodos para gestionar reservas
 
     public void insertar(Reserva reserva) throws OperationNotSupportedException {
 

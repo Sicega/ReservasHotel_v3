@@ -31,16 +31,14 @@ public class Habitaciones implements IHabitaciones {
         Iterator<Habitacion> iterator = coleccionHabitaciones.iterator();
         while (iterator.hasNext()) {
             Habitacion habitacion = iterator.next();
-            if (habitacion != null) { // Debido a la herencia hago uso de instanceof para cada tipo de habitacion
-                if (habitacion instanceof Simple) {
-                    miHabitacion.add(new Simple((Simple) habitacion));
-                } else if (habitacion instanceof Doble) {
-                    miHabitacion.add(new Doble((Doble) habitacion));
-                } else if (habitacion instanceof Triple) {
-                    miHabitacion.add(new Triple((Triple) habitacion));
-                } else if (habitacion instanceof Suite) {
-                    miHabitacion.add(new Suite((Suite) habitacion));
-                }
+            if (habitacion instanceof Simple) {
+                miHabitacion.add(new Simple((Simple) habitacion));
+            } else if (habitacion instanceof Doble) {
+                miHabitacion.add(new Doble((Doble) habitacion));
+            } else if (habitacion instanceof Triple) {
+                miHabitacion.add(new Triple((Triple) habitacion));
+            } else if (habitacion instanceof Suite) {
+                miHabitacion.add(new Suite((Suite) habitacion));
             }
         }
 
@@ -52,18 +50,21 @@ public class Habitaciones implements IHabitaciones {
     public List<Habitacion> get(TipoHabitacion tipoHabitacion) {
         List<Habitacion> habitacionesTipo = new ArrayList<>();
 
-        // Utilizo un iterador para recorrer la lista de habitaciones
-        Iterator<Habitacion> iterator = coleccionHabitaciones.iterator();
-        while (iterator.hasNext()) {
-            Habitacion habitacion = iterator.next();
-            if (habitacion.getClass().equals(tipoHabitacion)) { // todo corregir
+        for(Habitacion habitacion : coleccionHabitaciones) {
+            if(tipoHabitacion.equals(TipoHabitacion.SIMPLE)) {
                 if (habitacion instanceof Simple) {
                     habitacionesTipo.add(new Simple((Simple) habitacion));
-                } else if (habitacion instanceof Doble) {
+                }
+            } else if (tipoHabitacion.equals(TipoHabitacion.DOBLE)) {
+                if (habitacion instanceof Doble) {
                     habitacionesTipo.add(new Doble((Doble) habitacion));
-                } else if (habitacion instanceof Triple) {
+                }
+            } else if (tipoHabitacion.equals(TipoHabitacion.TRIPLE)) {
+                if (habitacion instanceof Triple) {
                     habitacionesTipo.add(new Triple((Triple) habitacion));
-                } else if (habitacion instanceof Suite) {
+                }
+            } else if (tipoHabitacion.equals(TipoHabitacion.SUITE)) {
+                if (habitacion instanceof Suite) {
                     habitacionesTipo.add(new Suite((Suite) habitacion));
                 }
             }
@@ -113,7 +114,6 @@ public class Habitaciones implements IHabitaciones {
 
         // Busco el índice de la habitación en la colección
         int indice = buscarIndice(habitacion);
-        habitacion.getClass(); // todo corregir
 
         // Devuelvo la habitación encontrada o null si no se encontró
         if (indice != -1) {

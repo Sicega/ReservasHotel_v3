@@ -248,25 +248,6 @@ public class Consola {
     }
 
 
-    public static Reserva leerReserva() {
-
-        System.out.println("Introduce los datos de la reserva:");
-
-        // Llama a los métodos de la clase Consola para obtener los objetos Huesped, Habitacion, Regimen, etc.
-
-        Huesped huesped = leerHuespedPorDni();
-        Habitacion habitacion = leerHabitacionPorIdentificador();
-        Regimen regimen=leerRegimen();
-        System.out.println("Indica la fecha de inicio de la reserva:");
-        LocalDate fechaInicioReserva = leerFecha();
-        System.out.println("Indica la fecha de fin de la reserva:");
-        LocalDate fechaFinReserva = leerFecha();
-        int numeroPersonas= leerNumeroPersonas();
-
-        // Crea y devuelve un nuevo objeto Reserva con los datos introducidos
-
-        return new Reserva(huesped, habitacion, regimen, fechaInicioReserva, fechaFinReserva, numeroPersonas);
-    }
 
     public static LocalDateTime leerFechaHora(String mensaje) {
 

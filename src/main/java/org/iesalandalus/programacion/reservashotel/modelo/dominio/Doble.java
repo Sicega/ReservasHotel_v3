@@ -3,9 +3,9 @@ package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 public class Doble extends Habitacion{
 
     private static final int NUM_MAXIMO_PERSONAS=2; // Al ser habitacion doble el nº máx. personas es 2
-    static final int MIN_NUM_CAMAS_INDIVIDUALES=2; // Modificador por defecto package
+    static final int MIN_NUM_CAMAS_INDIVIDUALES=0; // Modificador por defecto package
     static final int MAX_NUM_CAMAS_INDIVIDUALES=2;
-    static final int MIN_NUM_CAMAS_DOBLES=1;
+    static final int MIN_NUM_CAMAS_DOBLES=0;
     static final int MAX_NUM_CAMAS_DOBLES=1;
     private int numCamasIndividuales;
     private int numCamasDobles;
@@ -14,12 +14,14 @@ public class Doble extends Habitacion{
         super(planta, puerta, precio);
         setNumCamasIndividuales(numCamasIndividuales);
         setNumCamasDobles(numCamasDobles);
+        validaNumCamas();
     }
 
     public Doble(Doble habitacionDoble) {
         super(habitacionDoble);
         setNumCamasIndividuales(habitacionDoble.getNumCamasIndividuales());
         setNumCamasDobles(habitacionDoble.getNumCamasDobles());
+        validaNumCamas();
     }
 
     public int getNumCamasIndividuales() {
@@ -30,7 +32,7 @@ public class Doble extends Habitacion{
     public void setNumCamasIndividuales(int numCamasIndividuales) {
 
         this.numCamasIndividuales = numCamasIndividuales;
-        validaNumCamas(); // Valida el número de camas individuales antes de asignarlo, hago igual para el de camas dobles
+         // Valida el número de camas individuales tras asignarlo, hago igual para el de camas dobles
 
     }
 
@@ -42,19 +44,27 @@ public class Doble extends Habitacion{
     public void setNumCamasDobles(int numCamasDobles) {
 
         this.numCamasDobles = numCamasDobles;
-        validaNumCamas();
 
     }
 
     private void validaNumCamas(){ // Hago uso de las constantes para establecer el número obligatorio de camas individuales y dobles
 
         if (getNumCamasIndividuales() < MIN_NUM_CAMAS_INDIVIDUALES || getNumCamasIndividuales() > MAX_NUM_CAMAS_INDIVIDUALES) {
-            throw new IllegalArgumentException("ERROR: El número de camas individuales debe ser 2.");
+            throw new IllegalArgumentException("ERROR: El número de camas individuales de una habitación doble no puede ser inferior a 0 ni mayor que 2");
         }
 
         if (getNumCamasDobles() < MIN_NUM_CAMAS_DOBLES || getNumCamasDobles() > MAX_NUM_CAMAS_DOBLES) {
-            throw new IllegalArgumentException("ERROR: El número de camas dobles debe ser 1.");
+            throw new IllegalArgumentException("ERROR: El número de camas dobles de una habitación doble no puede ser inferior a 0 ni mayor que 1");
         }
+
+        if(getNumCamasIndividuales() != 2 && getNumCamasDobles() == 0 ){
+            throw new IllegalArgumentException("ERROR: La distribución de camas en una habitación doble tiene que ser 2 camas individuales y 0 doble o 0 camas individuales y 1 doble");
+        }
+
+        if (getNumCamasIndividuales() != 0 && getNumCamasDobles() == 1){
+            throw new IllegalArgumentException("ERROR: La distribución de camas en una habitación doble tiene que ser 2 camas individuales y 0 doble o 0 camas individuales y 1 doble");
+        }
+
 
     }
 

@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.reservashotel;
 
 import org.iesalandalus.programacion.reservashotel.controlador.Controlador;
 import org.iesalandalus.programacion.reservashotel.modelo.Modelo;
+import org.iesalandalus.programacion.reservashotel.vista.Opcion;
 import org.iesalandalus.programacion.reservashotel.vista.Vista;
 
 public class MainApp {
@@ -14,6 +15,8 @@ public class MainApp {
         Modelo modelo = new Modelo();
         Vista vista = new Vista();
         Controlador controlador = new Controlador(modelo, vista);
+
+
 
         // Inicio la aplicación invocando el método comenzar del controlador
 

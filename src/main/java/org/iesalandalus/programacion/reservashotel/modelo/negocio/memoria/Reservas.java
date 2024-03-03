@@ -1,9 +1,6 @@
 package org.iesalandalus.programacion.reservashotel.modelo.negocio.memoria;
 
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.IReservas;
 
 import javax.naming.OperationNotSupportedException;
@@ -117,7 +114,7 @@ public class Reservas implements IReservas {
     // Para obtener las reservas de un huésped
     public List<Reserva> getReservas(Huesped huesped) {
         if (huesped == null) {
-            throw new NullPointerException("ERROR: No se pueden buscar reservas de un huesped nulo.");
+            throw new NullPointerException("ERROR: No se pueden buscar reservas de un huésped nulo.");
         }
 
         List<Reserva> miReserva = new ArrayList<>();
@@ -140,19 +137,32 @@ public class Reservas implements IReservas {
             throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");
         }
 
-        List<Reserva> miReserva = new ArrayList<>();
+        List<Reserva> habitacionesTipo = new ArrayList<>();
 
-        // Utilizo un iterador para recorrer el ArrayList y agregar las reservas del tipo de habitación al nuevo ArrayList
-        Iterator<Reserva> iterator = coleccionReservas.iterator();
-        while (iterator.hasNext()) {
-            Reserva actual = iterator.next();
-            if (actual.getHabitacion().getClass().equals(tipoHabitacion)) { // todo corregir
-                miReserva.add(new Reserva(actual));
+        for(Reserva reserva : coleccionReservas) {
+            if(tipoHabitacion.equals(TipoHabitacion.SIMPLE)) {
+                if (reserva.getHabitacion() instanceof Simple) {
+                    habitacionesTipo.add(new Reserva(reserva));
+                }
+            } else if (tipoHabitacion.equals(TipoHabitacion.DOBLE)) {
+                if (reserva.getHabitacion() instanceof Doble) {
+                    habitacionesTipo.add(new Reserva(reserva));
+                }
+            } else if (tipoHabitacion.equals(TipoHabitacion.TRIPLE)) {
+                if (reserva.getHabitacion() instanceof Triple) {
+                    habitacionesTipo.add(new Reserva(reserva));
+                }
+            } else if (tipoHabitacion.equals(TipoHabitacion.SUITE)) {
+                if (reserva.getHabitacion() instanceof Suite) {
+                    habitacionesTipo.add(new Reserva(reserva));
+                }
             }
         }
 
-        return miReserva;
-    }
+        // Devuelvo una nueva lista con las habitaciones del tipo especificado copiadas
+        return new ArrayList<>(habitacionesTipo);
+        }
+
 
     // Para obtener las reservas futuras de una habitación
     public List<Reserva> getReservasFuturas(Habitacion habitacion) {
