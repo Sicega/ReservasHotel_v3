@@ -30,6 +30,9 @@ public class Doble extends Habitacion{
     }
 
     public void setNumCamasIndividuales(int numCamasIndividuales) {
+        if(numCamasIndividuales< MIN_NUM_CAMAS_INDIVIDUALES || numCamasIndividuales > MAX_NUM_CAMAS_INDIVIDUALES){
+            throw new IllegalArgumentException("ERROR: El número de camas individuales de una habitación doble no puede ser inferior a 0 ni mayor que 2");
+        }
 
         this.numCamasIndividuales = numCamasIndividuales;
 
@@ -41,6 +44,9 @@ public class Doble extends Habitacion{
     }
 
     public void setNumCamasDobles(int numCamasDobles) {
+        if(numCamasDobles< MIN_NUM_CAMAS_DOBLES || numCamasDobles > MAX_NUM_CAMAS_DOBLES){
+            throw new IllegalArgumentException("ERROR: El número de camas dobles de una habitación doble no puede ser inferior a 0 ni mayor que 1");
+        }
 
         this.numCamasDobles = numCamasDobles;
     }

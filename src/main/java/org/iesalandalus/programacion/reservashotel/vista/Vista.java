@@ -239,9 +239,26 @@ public class Vista {
 
             nuevaReserva = new Reserva(huespedIntroducido, habitacionIntroducida,nuevaReserva.getRegimen(), nuevaReserva.getFechaInicioReserva(), nuevaReserva.getFechaFinReserva(), nuevaReserva.getNumeroPersonas());
 
-            controlador.insertar(nuevaReserva);
+            TipoHabitacion habitacionTipo;
 
-            System.out.println("Reserva insertada correctamente.");
+            if(nuevaReserva.getHabitacion() instanceof Simple){
+                habitacionTipo = TipoHabitacion.SIMPLE;
+            }
+            else if(nuevaReserva.getHabitacion() instanceof Doble){
+                habitacionTipo = TipoHabitacion.DOBLE;
+            }
+            else if(nuevaReserva.getHabitacion() instanceof Triple){
+                habitacionTipo = TipoHabitacion.TRIPLE;
+            }
+            else{
+                habitacionTipo = TipoHabitacion.SUITE;
+            }
+
+            if (consultarDisponibilidad(habitacionTipo, nuevaReserva.getFechaInicioReserva(), nuevaReserva.getFechaFinReserva()) != null){
+                controlador.insertar(nuevaReserva);
+                System.out.println("Reserva insertada correctamente.");
+            }
+
 
         } catch (IllegalArgumentException | OperationNotSupportedException | NullPointerException e) {
 
@@ -310,7 +327,11 @@ public class Vista {
         System.out.println("Introduce la fecha de fin de reserva: ");
         LocalDate fechaFinEscogida = Consola.leerFecha();
 
-        consultarDisponibilidad(tipoHabitacionEscogida,fechaInicioEscogida,fechaFinEscogida);
+        if (consultarDisponibilidad(tipoHabitacionEscogida,fechaInicioEscogida,fechaFinEscogida) == null){
+            System.out.println("No hay disponibilidad.");
+        }else{
+            System.out.println("Hay disponibilidad.");
+        }
 
     }
 

@@ -147,11 +147,32 @@ public class Consola {
         if (tipoHabitacion.equals(TipoHabitacion.SIMPLE)) {
             return new Simple(planta, puerta, precio);
         }else if(tipoHabitacion.equals(TipoHabitacion.DOBLE)){
-            return new Doble(planta, puerta, precio, 2, 0);
+            System.out.println("¿Cuantas camas individuales desea? (Escoja entre 0 y 2)");
+            int camasIndividuales=Entrada.entero();
+            System.out.println("¿Cuantas camas dobles desea? (Escoja 0 o 1)");
+            int camasDobles=Entrada.entero();
+            return new Doble(planta, puerta, precio, camasIndividuales, camasDobles);
         } else if (tipoHabitacion.equals(TipoHabitacion.TRIPLE)) {
-            return new Triple(planta, puerta, precio, 2, 2,1);
+            System.out.println("¿Cuántos baños desea? Escoja entre 1 y 2");
+            int numBanos=Entrada.entero();
+            System.out.println("¿Cuántas camas individuales desea? Escoja entre 0 y 3");
+            int camasIndividuales=Entrada.entero();
+            System.out.println("¿Cuántas camas dobles desea? Escoja entre 0 y 1");
+            int camasDobles=Entrada.entero();
+            return new Triple(planta, puerta, precio, numBanos, camasIndividuales,camasDobles);
         } else if (tipoHabitacion.equals(TipoHabitacion.SUITE)){
-            return new Suite(planta,puerta,precio,2,true);
+            String jacuzzi;
+
+            do{
+                System.out.println("¿Desea Jacuzzi en la habitación? Introduzca si o no");
+                jacuzzi=Entrada.cadena();
+            }while(!jacuzzi.equalsIgnoreCase("si") && !jacuzzi.equalsIgnoreCase("no"));
+
+            boolean jacuzziSuite=false;
+            if(jacuzzi.equalsIgnoreCase("si")) {
+                jacuzziSuite=true;
+            }
+            return new Suite(planta,puerta,precio,2,jacuzziSuite);
         }else{
             return null;
         }
